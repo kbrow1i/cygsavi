@@ -1,0 +1,57 @@
+NAME="savi"
+VERSION=1.5.0b
+RELEASE=1
+
+SRC_URI="mirror://sourceforge/${PN}/${PN}${PV}-release.tar.gz"
+SRC_DIR="savi1.5.0"
+SRC_URI+=" savi_bin"
+
+PATCH_URI="geomview.patch"
+PATCH_URI+=" savi_script.patch"
+PATCH_URI+=" tcl_string_result.patch"
+PATCH_URI+=" zlib.patch"
+
+HOMEPAGE="http://savi.sourceforge.net/"
+SUMMARY="Satellite constellation simulation and visualization"
+
+DESCRIPTION="SaVi allows you to simulate satellite orbits and coverage, in two and
+three dimensions.  SaVi is particularly useful for simulating
+satellite constellations.  SaVi can use Geomview, an optional package,
+for 3D rendering."
+
+CATEGORY="Science"
+
+DEPEND="zlib-devel tcl-tk-devel"
+# REQUIRES="geomview"
+
+MAKEOPTS+=" -j1"
+
+DOCS="README-COVERAGE-TEXTUREMAP"
+
+src_compile() {
+    lndirs
+    cd ${B}
+    cygmake ARCH=cygwin
+}
+
+src_install() {
+    newbin ${S}/savi_bin savi
+    cd ${B}
+    exeinto /usr/libexec/savi/bin
+    doexe bin/SaVi
+    exeinto /usr/share/savi
+    doexe savi
+    insinto /usr/share/savi
+    doins COPYRIGHT BUGS README README-COVERAGE-TEXTUREMAP
+    insinto /usr/share/savi/manual
+    doins manual/index.html
+    for d in data manual/images maps oogl tcl
+    do
+	insinto /usr/share/savi/${d}
+	doins ${d}/*
+    done
+    find ${D}/usr/share/savi -name 'Makefile*' -delete
+    insinto /usr/libexec/geomview
+    newins .geomview .geomview-savi
+}
+

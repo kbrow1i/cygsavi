@@ -1,0 +1,47 @@
+--- origsrc/savi1.5.0/savi	2016-09-02 22:54:44.000000000 -0400
++++ src/savi1.5.0/savi	2017-06-23 16:59:15.199061600 -0400
+@@ -41,7 +41,7 @@ export SAVI
+ #
+ # Default executable absolute location and name
+ #
+-SAVIBIN="${SAVI}/bin/SaVi"
++SAVIBIN="/usr/libexec/savi/bin/SaVi"
+ 
+ #
+ # Set locations of tcl and tk library code needed at runtime
+@@ -115,10 +115,10 @@ elif [ -d /devices ]; then
+   ARCH=sun
+ elif [ -d /usr/bsd -a -d /usr/sbin ]; then
+   ARCH=irix
+-elif [ -d /cygdrive ]; then
++elif [ -d /proc/cygdrive ]; then
+   ARCH=cygwin
+-  if [ ! -d /usr/lib/tk8.5 ]; then
+-    # unix port of Tk 8.5 not installed
++  if [ ! -d /usr/lib/tk8.6 ]; then
++    # unix port of Tk 8.6 not installed
+     if [ ! -d /usr/share/tk/8.4 ]; then
+       # Insight Tk 8.4 not installed.
+       echo "SaVi: A Tk package is not installed in Cygwin." >&2
+@@ -168,9 +168,9 @@ if [ ${ARCH} = "cygwin84" ]; then
+   TCL_LIBRARY=/usr/share/tcl8.4
+   TK_LIBRARY=/usr/share/tk8.4
+ elif [ ${ARCH} = "cygwin" ]; then
+-  # ...but new Tcl/Tk 8.5 port (Oct 2011) is installed here:
+-  TCL_LIBRARY=/usr/lib/tk8.5
+-  TK_LIBRARY=/usr/lib/tk8.5
++  # ...but new Tcl/Tk 8.6 port (Mar 2017) is installed here:
++  TCL_LIBRARY=/usr/lib/tk8.6
++  TK_LIBRARY=/usr/lib/tk8.6
+ elif [ ${ARCH} = "macosx" ]; then
+   # Mac OS X installs libraries in shared folder
+   TCL_LIBRARY=/usr/lib
+@@ -290,7 +290,7 @@ fi
+ # If savi tree has been split, with files (data/ oogl/ tcl/ maps/ and textfiles)
+ # placed elsewhere, then uncomment and edit the following line to reset SAVI to
+ # that other tree location.
+-# SAVI=/usr/share/savi
++SAVI=/usr/share/savi
+ # This was implemented for Debian packagers.
+ 
+ #

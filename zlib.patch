@@ -1,0 +1,48 @@
+--- origsrc/savi1.5.0/src/Makefile	2016-09-04 07:50:17.000000000 -0400
++++ src/savi1.5.0/src/Makefile	2017-06-23 16:59:15.215074000 -0400
+@@ -25,7 +25,7 @@ include Makefile_defs_$(ARCH)
+ # zlib enables transparent gzip compression of dynamic texture scratchfiles.
+ # OTHER_LIBS = -lz should be inserted at end of definitions file.
+ 
+-   GCC_FLAGS = -O2 -DNO_ZLIB
++   GCC_FLAGS = -O2
+ 
+         LIBS = $(TCL_LIBS) $(OTHER_LIBS) -lm
+ 
+--- origsrc/savi1.5.0/src/coverage_vis.c	2016-03-15 21:26:48.000000000 -0400
++++ src/savi1.5.0/src/coverage_vis.c	2017-06-23 16:59:15.220079300 -0400
+@@ -81,7 +81,7 @@ static int gzip_compress2(Bytef *dest, u
+                         const Bytef *source, uLong sourceLen,
+                         int level);
+ static void write_image_to_stream_compressed();
+-static void write_image_as_ppm_gz(gzFile *f);
++static void write_image_as_ppm_gz(gzFile f);
+ static void write_image_to_file_gz(char *name);
+ 
+ static void * image_compress_scratch = NULL;
+@@ -539,7 +539,7 @@ write_image_to_stream_compressed(void)
+ 
+ /* function requires zlib */
+ static void
+-write_image_as_ppm_gz(gzFile *f)
++write_image_as_ppm_gz(gzFile f)
+ {
+   unsigned int w, h, length, gzlength;
+   unsigned char *p;
+@@ -565,14 +565,14 @@ write_image_as_ppm_gz(gzFile *f)
+ static void
+ write_image_to_file_gz(char * name)
+ {
+-  gzFile *f;
++  gzFile f;
+ 
+   if (NULL == (f = gzopen(name, "w"))) {
+     fprintf(stderr,"\nSaVi: unable to save compressed coverage map to %s", name);
+     return;
+   }
+ 
+-  gzsetparams(name, Z_BEST_COMPRESSION, Z_RLE); /* Z_RLE for PNG-style data */
++  gzsetparams(f, Z_BEST_COMPRESSION, Z_RLE); /* Z_RLE for PNG-style data */
+   write_image_as_ppm_gz(f);
+ 
+   gzclose(f);
