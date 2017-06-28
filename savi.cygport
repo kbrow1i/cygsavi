@@ -1,14 +1,15 @@
 NAME="savi"
-VERSION=1.5.0b
-RELEASE=1
+VERSION=1.5.1
+RELEASE=1.rc1
 
-SRC_URI="mirror://sourceforge/${PN}/${PN}${PV}-release.tar.gz"
-SRC_DIR="savi1.5.0"
+# SRC_URI="mirror://sourceforge/${PN}/${PN}${PV}-release.tar.gz"
+SRC_URI="http://personal.ee.surrey.ac.uk/Personal/L.Wood/software/SaVi/src/unreleased/savi1.5.1-release-rc1.tar.gz"
+
+SRC_DIR="${PN}${PV}"
 SRC_URI+=" savi_bin"
 
 PATCH_URI="geomview.patch"
 PATCH_URI+=" savi_script.patch"
-PATCH_URI+=" tcl_string_result.patch"
 PATCH_URI+=" zlib.patch"
 
 HOMEPAGE="http://savi.sourceforge.net/"
@@ -27,6 +28,13 @@ DEPEND="zlib-devel tcl-tk-devel"
 MAKEOPTS+=" -j1"
 
 DOCS="README-COVERAGE-TEXTUREMAP"
+HTMLDOCS="manual/*"
+
+savi_CONTENTS="--exclude=Makefile usr"
+PKG_IGNORE="
+	usr/share/doc/savi/html/Makefile
+	usr/share/doc/savi/html/images/Makefile
+"
 
 src_compile() {
     lndirs
@@ -42,10 +50,10 @@ src_install() {
     exeinto /usr/share/savi
     doexe savi
     insinto /usr/share/savi
+    # These files have to be in /usr/share/savi in order for the
+    # runtime Help to find them.
     doins COPYRIGHT BUGS README README-COVERAGE-TEXTUREMAP
-    insinto /usr/share/savi/manual
-    doins manual/index.html
-    for d in data manual/images maps oogl tcl
+    for d in data maps oogl tcl
     do
 	insinto /usr/share/savi/${d}
 	doins ${d}/*
