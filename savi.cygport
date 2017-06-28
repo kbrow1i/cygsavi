@@ -40,7 +40,7 @@ PKG_IGNORE="
 src_compile() {
     lndirs
     cd ${B}
-    cygmake ARCH=cygwin HOST= HOSTNAME='cornell.edu'
+    cygmake ARCH=cygwin
 }
 
 src_install() {
