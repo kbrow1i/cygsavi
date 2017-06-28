@@ -1,6 +1,6 @@
 NAME="savi"
 VERSION=1.5.1
-RELEASE=1.rc1
+RELEASE=2.rc1
 
 # SRC_URI="mirror://sourceforge/${PN}/${PN}${PV}-release.tar.gz"
 SRC_URI="http://personal.ee.surrey.ac.uk/Personal/L.Wood/software/SaVi/src/unreleased/savi1.5.1-release-rc1.tar.gz"
@@ -11,6 +11,7 @@ SRC_URI+=" savi_bin"
 PATCH_URI="geomview.patch"
 PATCH_URI+=" savi_script.patch"
 PATCH_URI+=" zlib.patch"
+PATCH_URI+=" about.patch"
 
 HOMEPAGE="http://savi.sourceforge.net/"
 SUMMARY="Satellite constellation simulation and visualization"
@@ -39,7 +40,7 @@ PKG_IGNORE="
 src_compile() {
     lndirs
     cd ${B}
-    cygmake ARCH=cygwin
+    cygmake ARCH=cygwin HOST= HOSTNAME='cornell.edu'
 }
 
 src_install() {

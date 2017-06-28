@@ -1,0 +1,11 @@
+--- origsrc/savi1.5.1/tcl/about.tcl	2017-01-02 01:11:32.000000000 -0500
++++ src/savi1.5.1/tcl/about.tcl	2017-06-28 14:16:03.267450700 -0400
+@@ -54,7 +54,7 @@ proc about(build) {} {
+ 
+     build_Label $cmd l2 \
+ "http://savi.sourceforge.net/
+-A user manual is in SaVi's manual/ directory.
++A user manual is in /usr/share/doc/savi/html.
+ 
+ 
+ Originally created at The Geometry Center
