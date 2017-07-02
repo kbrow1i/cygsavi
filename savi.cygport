@@ -1,9 +1,8 @@
 NAME="savi"
 VERSION=1.5.1
-RELEASE=2.rc1
+RELEASE=1
 
-# SRC_URI="mirror://sourceforge/${PN}/${PN}${PV}-release.tar.gz"
-SRC_URI="http://personal.ee.surrey.ac.uk/Personal/L.Wood/software/SaVi/src/unreleased/savi1.5.1-release-rc1.tar.gz"
+SRC_URI="mirror://sourceforge/${PN}/${PN}${PV}-release.tar.gz"
 
 SRC_DIR="${PN}${PV}"
 SRC_URI+=" savi_bin"
