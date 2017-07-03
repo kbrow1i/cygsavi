@@ -1,0 +1,17 @@
+From cygwin-announce-savi-1.5.1-1 Mon Jul 03 08:36:44 2017
+From: Ken Brown <kbrown@cornell.edu>
+To: cygwin-announce@cygwin.com
+Date: Mon, 03 Jul 2017 08:36:44 -0400
+Subject: savi 1.5.1-1
+
+The following package has been added to the Cygwin distribution:
+
+* savi-1.5.1-1
+
+SaVi allows you to simulate satellite orbits and coverage, in two and
+three dimensions.  SaVi is particularly useful for simulating
+satellite constellations.  SaVi can use Geomview, an optional package,
+for 3D rendering.
+
+Ken Brown
+Cygwin's SaVi maintainer
